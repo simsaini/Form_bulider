@@ -36,8 +36,7 @@ let formData = [
     "label": "Select Language",
     "id": "user-language",
     "icon": "",
-    "options": [
-      {
+    "options": [{
         "label": "English",
         "value": "EN"
       },
@@ -85,19 +84,52 @@ let formData = [
 // HINTS:
 // As you can see, we access the first element in the array
 // with [0] and then grab the property "label" using the "." operator
-( function(){
+(function() {
   // Select the first element from the array
-  let first = formData[ 0 ];
+  let first = formData[0];
   // Log the first object
-  console.log( first );
+  console.log(first);
   // Log the string "First Name"
-  console.log( first.label );
-} )();
+  console.log(first.label);
+})();
 
 
 // -------- Your Code Goes Below this Line --------
 
-let fields = document.getElementById("fields");
-let firstname = document.createElement("user-first-name");
-let lastname = document.createElement("user-last-name");
-let 
+let form = document.querySelector(".fields");
+
+for (var i = 0; i < formData.length; i++) {
+  if ((formData[i].type === "text") || (formData[i].type === "email") || (formData[i].type === "tel")){
+    let input = document.createElement("input");
+    input.setAttribute("type", formData[i].type);
+    input.setAttribute("label", formData[i].label);
+    input.setAttribute("id", formData[i].id);
+    input.setAttribute("icon", formData[i].icon);
+    input.setAttribute("options", formData[i].options);
+    input.setAttribute("placeholder", formData[i].label );
+    form.appendChild(input);
+  }
+  else if (formData[i].type === "textarea"){
+    let textarea = document.createElement("textarea");
+    textarea.setAttribute("type", formData[i].type);
+    textarea.setAttribute("label", formData[i].label);
+    textarea.setAttribute("id", formData[i].id);
+    textarea.setAttribute("icon", formData[i].icon);
+    textarea.setAttribute("options", formData[i].options);
+    textarea.setAttribute("placeholder", formData[i].label);
+    form.appendChild(textarea);
+  }
+  else if (formData[i].type === "select"){
+    let select = document.createElement("select");
+
+    for (var j = 0; j < formData[i].options.length; j++){
+      formData[j]
+
+      let option = document.createElement("option");
+      option.setAttribute("label", formData[i].options[j].label);
+      option.setAttribute("value", formData[i].options[j].value);
+      select.appendChild(option);
+      form.appendChild(select);
+    }
+  }
+}
